@@ -3,8 +3,8 @@ defmodule ExFaiss.Index do
   Wraps references to a Faiss index.
   """
   alias __MODULE__
+  alias ExFaiss.NIF
   import ExFaiss.Shared
-  import ExFaiss.NIF
 
   defstruct [:dim, :ref, :device]
 
@@ -41,7 +41,7 @@ defmodule ExFaiss.Index do
     opts = Keyword.validate!(opts, metric: :l2, device: :host)
     metric_type = metric_type_to_int(opts[:metric])
 
-    ref = ExFaiss.NIF.new_index(dim, description, metric_type) |> unwrap!()
+    ref = NIF.new_index(dim, description, metric_type) |> unwrap!()
 
     case opts[:device] do
       :cuda ->
