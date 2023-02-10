@@ -4,6 +4,7 @@ defmodule ExFaiss.Index do
   """
   alias __MODULE__
   import ExFaiss.Shared
+  import ExFaiss.NIF
 
   defstruct [:dim, :ref, :device]
 
